@@ -14,6 +14,12 @@ class ContactsListViewController: UITableViewController {
         super.viewDidLoad()
         fetchData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let contactVC = segue.destination as! ContactViewController
+        
+        contactVC.contact = sender as? Contact
+    }
 }
 
 // MARK: - Private Methods
@@ -26,6 +32,13 @@ extension ContactsListViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+}
+
+// MARK: - UITAbleViewDelegate
+extension ContactsListViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Segue.showContact.rawValue, sender: contacts[indexPath.row])
     }
 }
 
@@ -45,6 +58,13 @@ extension ContactsListViewController {
         let contact = contacts[indexPath.row]
         content.text = contact.name?.first
         content.secondaryText = contact.name?.last
+        
+        if let imageURL = contact.picture?.thumbnail {
+            NetworkManager.shared.fetchData(with: imageURL) { imageData in
+                content.image = UIImage(data: imageData)
+                cell.contentConfiguration = content
+            }
+        }
         
         cell.contentConfiguration = content
         return cell

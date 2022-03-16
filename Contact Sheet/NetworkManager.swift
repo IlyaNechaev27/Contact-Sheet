@@ -51,3 +51,7 @@ class NetworkManager {
 enum Link: String {
     case api = "https://randomuser.me/api/"
 }
+
+enum Segue: String {
+    case showContact = "ShowContact"
+}

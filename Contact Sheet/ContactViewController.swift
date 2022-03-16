@@ -8,22 +8,25 @@
 import UIKit
 
 class ContactViewController: UIViewController {
-
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    
+    public var contact: Contact!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupViewController()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupViewController() {
+        firstNameLabel.text = contact.name?.first
+        lastNameLabel.text = contact.name?.last
+        
+        if let imageURL = contact.picture?.large {
+            NetworkManager.shared.fetchData(with: imageURL) { imageData in
+                self.imageView.image = UIImage(data: imageData)
+            }
+        }
     }
-    */
-
 }
