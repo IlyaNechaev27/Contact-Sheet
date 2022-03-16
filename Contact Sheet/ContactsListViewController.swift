@@ -13,25 +13,31 @@ class ContactsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchData()
+        setupRefreshControl()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let contactVC = segue.destination as! ContactViewController
-        
         contactVC.contact = sender as? Contact
     }
 }
 
 // MARK: - Private Methods
 extension ContactsListViewController {
-    private func fetchData() {
+    @objc private func fetchData() {
         NetworkManager.shared.fetchContact { result in
             self.contacts = result
-            print(result)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            self.tableView.reloadData()
+            
+            if self.refreshControl != nil {
+                self.refreshControl?.endRefreshing()
             }
         }
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(fetchData), for: .valueChanged)
     }
 }
 
