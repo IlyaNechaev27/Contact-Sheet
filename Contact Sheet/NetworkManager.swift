@@ -33,6 +33,19 @@ class NetworkManager {
                 }
             }
     }
+    
+    func fetchData(with urlString: String, completion: @escaping (Data) -> Void) {
+        AF.request(urlString)
+            .validate()
+            .responseData { responseData in
+                switch responseData.result {
+                case .success(let data):
+                    completion(data)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
 }
 
 enum Link: String {
