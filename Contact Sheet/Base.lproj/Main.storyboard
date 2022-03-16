@@ -1,24 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="F9K-ZC-Sz9">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Contacts-->
+        <scene sceneID="3XX-fi-hip">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="iXt-C4-yNE" customClass="ContactsListViewController" customModule="Contact_Sheet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="gkb-y5-fe2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Contact" id="XdV-oi-T52">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XdV-oi-T52" id="vj1-w8-Bvx">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iXt-C4-yNE" id="87r-2c-7iX"/>
+                            <outlet property="delegate" destination="iXt-C4-yNE" id="31c-tX-qvy"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Contacts" id="WQz-TT-zbm"/>
+                    <connections>
+                        <segue destination="50W-mF-NT7" kind="show" identifier="ShowContact" id="gRN-T2-Oy0"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9QM-rq-ePh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-197" y="17"/>
+        </scene>
+        <!--Contact View Controller-->
+        <scene sceneID="d0a-Ax-nAp">
+            <objects>
+                <viewController id="50W-mF-NT7" customClass="ContactViewController" customModule="Contact_Sheet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="liY-FW-Qu6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Han-IN-KAv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ec0-yy-vGS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="duh-8b-AXB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="743" y="1"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xkw-su-bUX">
+            <objects>
+                <navigationController id="F9K-ZC-Sz9" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="3Qa-TB-Cqe">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="iXt-C4-yNE" kind="relationship" relationship="rootViewController" id="kMp-r5-erl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d8T-2J-NYR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1088" y="17"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
